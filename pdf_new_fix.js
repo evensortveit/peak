@@ -60,7 +60,7 @@ function toDataUrl(url) {
         doc.line(margin.left, margin.top + 40, margin.left +  width, margin.top + 40);
         doc.setDrawColor(0, 0, 0);
         doc.setFontSize(7);
-        let leftTop = .splitdiv.left>.w-layout-grid.grid-2 .fleetinfodiv.toArray().map(d=>$(d).text()).filter(d=>d !== ':');
+        let leftTop = .splitdiv.left>.w-layout-grid.grid-2.fleetinfodiv.toArray().map(d=>$(d).text()).filter(d=>d !== ':');
         let keys = leftTop.filter((_,i)=>i%2===0);
         let values = leftTop.filter((_,i)=>i%2===1);
         const shipName = $('.splitdiv.left>h1').text();
