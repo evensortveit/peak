@@ -1,6 +1,6 @@
 function toDataUrl(url) {
     //https://github.com/Rob--W/cors-anywhere
-    url = 'https://proxy-app-server.herokuapp.com/' + url;
+    //url = 'https://proxy-app-server.herokuapp.com/' + url;
     return new Promise((resolve)=>{
         let xhr = new XMLHttpRequest();
         xhr.onload = function() {
@@ -36,7 +36,7 @@ function toDataUrl(url) {
         imagePromise.push(toDataUrl(img.src));
     })
     Promise.all(imagePromise).then((images)=>{
-        images = images.filter(d=>!d.includes('application/xml'))
+        images = images.filter(d=>!d.includes('application/xml')&&!d.includes('text/html'))
         addPageOne(images[0], images.length);
         if(images.length > 1){
             addImagePages(images.slice(1))
@@ -87,11 +87,17 @@ function toDataUrl(url) {
             doc.addImage(image, 'JPEG', rightX, rightY, width/2, width/3.5);
             rightY = vesselsY
         }
+        leftMiddle = $('#manager .w-layout-grid.grid-2.com').find('.fleetinfo').toArray().map(d=>$(d).text()).filter(d=>d !== ':');
+        keys = leftMiddle.filter((_,i)=>i%2===0);
+        values = leftMiddle.filter((_,i)=>i%2===1);
+        const managerY = leftY + 20;
+        leftY = drawSection('MANAGERS', keys, values, margin.left, managerY);
+
         let rightMiddle =  $('.w-dyn-item > .columncontainer').not('.w-condition-invisible').find('.fleetinfo').toArray().map(d=>$(d).text()).filter(d=>d !== ':');
         keys = rightMiddle.filter((_,i)=>i%2===1);
         values = rightMiddle.filter((_,i)=>i%2===0);
         drawSection('HOLD CHARACTERISTICS', keys, values, rightX, rightY);
-        let rightBottom = $('.w-dyn-item > .w-layout-grid.grid-2.operator').find('.columncontainer').not('.w-condition-invisible').find('.fleetinfo').toArray().map(d=>$(d).text()).filter(d=>d !== ':');
+        let rightBottom = $('#operator .w-dyn-item > .w-layout-grid.grid-2.operator').find('.columncontainer').not('.w-condition-invisible').find('.fleetinfo').toArray().map(d=>$(d).text()).filter(d=>d !== ':');
         keys = rightBottom.filter((_,i)=>i%2===0);
         values = rightBottom.filter((_,i)=>i%2===1);
         drawSection('OPERATORS / OWNERS', keys, values, rightX, communicationY);
@@ -151,4 +157,3 @@ function toDataUrl(url) {
 
 
 }
-
