@@ -1,6 +1,6 @@
 function toDataUrl(url) {
-    //https://github.com/Rob--W/cors-anywhere
-    //url = 'https://proxy-app-server.herokuapp.com/' + url;
+    https://github.com/Rob--W/cors-anywhere
+    url = 'https://proxy-app-server.herokuapp.com/' + url;
     return new Promise((resolve)=>{
         let xhr = new XMLHttpRequest();
         xhr.onload = function() {
