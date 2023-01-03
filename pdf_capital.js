@@ -29,7 +29,7 @@ function toDataUrl(url) {
     let margin = {left: 24, right:24, top:14, bottom:30};
     let width = pageWidth - margin.left - margin.right;
     let height = pageHeight - margin.top - margin.bottom;
-    let images = $('#w-slider-mask-2 > div > .fleetimage');
+    let images = $('#w-slider-mask-2 > div > .fleetimage:not(.w-dyn-bind-empty')
 
     let imagePromise = []
     images.each((_, img)=>{
